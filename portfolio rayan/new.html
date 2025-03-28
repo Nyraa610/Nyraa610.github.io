@@ -1,0 +1,538 @@
+	<!DOCTYPE html>
+	<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Levi's</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+			:root {
+				--primary-color: #FF0000;
+				--secondary-color: #00F7FF;
+				--accent-color: #FFD600;
+				--dark: #111111;
+				--light: #FFFFFF;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+				font-family: 'Poppins', sans-serif;
+			}
+
+			body {
+				background-color: #f8f8f8;
+			}
+
+			/* Navigation */
+			nav {
+				background-color: var(--dark);
+				padding: 1rem;
+				position: fixed;
+				width: 100%;
+				top: 0;
+				z-index: 1000;
+			}
+
+			.nav-content {
+				max-width: 1400px;
+				margin: 0 auto;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.logo {
+				color: var(--primary-color);
+				font-size: 2rem;
+				font-weight: bold;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+			}
+
+			.nav-links {
+				display: flex;
+				gap: 2rem;
+			}
+
+			.nav-links a {
+				color: var(--light);
+				text-decoration: none;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				position: relative;
+			}
+
+			.nav-links a::after {
+				content: '';
+				position: absolute;
+				bottom: -5px;
+				left: 0;
+				width: 0;
+				height: 2px;
+				background-color: var(--primary-color);
+				transition: width 0.3s;
+			}
+
+			.nav-links a:hover::after {
+				width: 100%;
+			}
+
+			/* Hero Section */
+			.hero {
+				height: 100vh;
+				background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url("https://media.lesechos.com/api/v1/images/view/5bed8a758fe56f0f480d1a29/1280x720/060151361920-web-tete.jpg");
+				background-size: cover;
+				background-position: center;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				color: var(--light);
+				padding: 1rem;
+			}
+
+			.hero-content {
+				max-width: 800px;
+			}
+
+			.hero-content h1 {
+				font-size: 4rem;
+				margin-bottom: 1rem;
+				text-transform: uppercase;
+				letter-spacing: 3px;
+				animation: slideIn 1s ease;
+			}
+
+			.hero-content p {
+				font-size: 1.5rem;
+				margin-bottom: 2rem;
+				animation: fadeIn 2s ease;
+			}
+
+			.cta-button {
+				padding: 1rem 2.5rem;
+				background-color: var(--primary-color);
+				color: var(--light);
+				border: none;
+				border-radius: 30px;
+				font-size: 1.1rem;
+				font-weight: 600;
+				cursor: pointer;
+				transition: all 0.3s;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+			}
+
+			.cta-button:hover {
+				transform: scale(1.05);
+				background-color: var(--secondary-color);
+			}
+
+			/* Trending Section */
+			.trending-section {
+				padding: 6rem 2rem;
+				max-width: 1400px;
+				margin: 0 auto;
+			}
+
+			.section-title {
+				text-align: center;
+				font-size: 2.5rem;
+				margin-bottom: 3rem;
+				color: var(--dark);
+				text-transform: uppercase;
+				letter-spacing: 2px;
+			}
+
+			.products-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 2rem;
+			}
+
+			.product-card {
+				background: var(--light);
+				border-radius: 15px;
+				overflow: hidden;
+				box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+				transition: transform 0.3s;
+				position: relative;
+			}
+
+			.product-card:hover {
+				transform: translateY(-10px);
+			}
+
+			.product-image {
+				width: 100%;
+				height: 300px;
+				object-fit: cover;
+			}
+
+			.product-info {
+				padding: 1.5rem;
+			}
+
+			.product-name {
+				font-size: 1.2rem;
+				margin-bottom: 0.5rem;
+				color: var(--dark);
+			}
+
+			.product-price {
+				font-size: 1.3rem;
+				color: var(--primary-color);
+				font-weight: bold;
+			}
+
+			.product-tag {
+				position: absolute;
+				top: 1rem;
+				right: 1rem;
+				background: var(--accent-color);
+				color: var(--dark);
+				padding: 0.5rem 1rem;
+				border-radius: 20px;
+				font-weight: 600;
+				font-size: 0.9rem;
+			}
+
+			/* Categories Section */
+			.categories-section {
+				background: var(--dark);
+				padding: 6rem 2rem;
+				color: var(--light);
+			}
+
+			.categories-grid {
+				max-width: 1400px;
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 2rem;
+			}
+
+			.category-card {
+				position: relative;
+				height: 300px;
+				border-radius: 15px;
+				overflow: hidden;
+				cursor: pointer;
+			}
+
+			.category-image {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.5s;
+			}
+
+			.category-card:hover .category-image {
+				transform: scale(1.1);
+			}
+
+			.category-overlay {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				padding: 2rem;
+				background: linear-gradient(transparent, rgba(0,0,0,0.8));
+				color: var(--light);
+			}
+
+			.category-name {
+				font-size: 1.5rem;
+				font-weight: 600;
+				margin-bottom: 0.5rem;
+			}
+
+			/* Newsletter Section */
+			.newsletter-section {
+				padding: 4rem 2rem;
+				background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+				color: var(--light);
+				text-align: center;
+			}
+
+			.newsletter-content {
+				max-width: 600px;
+				margin: 0 auto;
+			}
+
+			.newsletter-form {
+				display: flex;
+				gap: 1rem;
+				margin-top: 2rem;
+			}
+
+			.newsletter-input {
+				flex: 1;
+				padding: 1rem;
+				border: none;
+				border-radius: 30px;
+				font-size: 1rem;
+			}
+
+			/* Footer */
+			footer {
+				background-color: var(--dark);
+				color: var(--light);
+				padding: 4rem 2rem;
+			}
+
+			.footer-content {
+				max-width: 1400px;
+				margin: 0 auto;
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 3rem;
+			}
+
+			.footer-section h4 {
+				color: var(--primary-color);
+				margin-bottom: 1.5rem;
+				font-size: 1.2rem;
+				text-transform: uppercase;
+			}
+
+			.social-links {
+				display: flex;
+				gap: 1rem;
+				margin-top: 1rem;
+			}
+
+			.social-links a {
+				color: var(--light);
+				font-size: 1.5rem;
+				transition: color 0.3s;
+			}
+
+			.social-links a:hover {
+				color: var(--primary-color);
+			}
+
+			/* Animations */
+			@keyframes slideIn {
+				from {
+					transform: translateY(50px);
+					opacity: 0;
+				}
+				to {
+					transform: translateY(0);
+					opacity: 1;
+				}
+			}
+
+			@keyframes fadeIn {
+				from {
+					opacity: 0;
+				}
+				to {
+					opacity: 1;
+				}
+			}
+
+			/* Responsive Design */
+			@media (max-width: 768px) {
+				.nav-links {
+					display: none;
+				}
+
+				.hero-content h1 {
+					font-size: 2.5rem;
+				}
+
+				.newsletter-form {
+					flex-direction: column;
+				}
+
+				.product-card {
+					margin: 0 1rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Navigation -->
+		<nav>
+			<div class="nav-content">
+        <a href="levis.html" style="text-decoration: none;">
+            <div class="logo">Levi's</div> </a>
+				<div class="nav-links">
+					<a href="#nouveautes">Nouveautés</a>
+					<a href="#hommes">Hommes</a>
+					<a href="#femmes">Femmes</a>
+					<a href="#promos">Promos</a>
+					<a href="#panier"><i class="fas fa-shopping-cart"></i></a>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Hero Section -->
+		<section class="hero">
+			<div class="hero-content">
+				<h1>NOUVELLE COLLECTION</h1>
+				<p>Découvre les dernières tendances streetwear</p>
+				<button class="cta-button">Shop Now</button>
+			</div>
+		</section>
+
+		<!-- Trending Section -->
+		<section class="trending-section" id="nouveautes">
+			<h2 class="section-title">Trending Now</h2>
+			<div class="products-grid">
+				<div class="product-card">
+					<img src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Product" class="product-image">
+					<div class="product-info">
+						<h3 class="product-name">Hoodie Oversize</h3>
+						<p class="product-price">59.99 €</p>
+					</div>
+					<span class="product-tag">NEW</span>
+				</div>
+				<div class="product-card">
+					<img src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Product" class="product-image">
+					<div class="product-info">
+						<h3 class="product-name">Cargo Pants</h3>
+						<p class="product-price">79.99 €</p>
+					</div>
+					<span class="product-tag">HOT</span>
+				</div>
+				<div class="product-card">
+					<img src="https://images.pexels.com/photos/1040424/pexels-photo-1040424.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Product" class="product-image">
+					<div class="product-info">
+						<h3 class="product-name">Sneakers Limited</h3>
+						<p class="product-price">129.99 €</p>
+					</div>
+					<span class="product-tag">EXCLUSIVE</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- Categories Section -->
+		<section class="categories-section">
+			<h2 class="section-title" style="color: var(--light);">Shop By Category</h2>
+			<div class="categories-grid">
+				<div class="category-card">
+					<img src="https://images.pexels.com/photos/1192609/pexels-photo-1192609.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Streetwear" class="category-image">
+					<div class="category-overlay">
+						<h3 class="category-name">Streetwear</h3>
+						<p>Découvrir →</p>
+					</div>
+				</div>
+				<div class="category-card">
+					<img src="https://images.pexels.com/photos/1478442/pexels-photo-1478442.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Sneakers" class="category-image">
+					<div class="category-overlay">
+						<h3 class="category-name">Sneakers</h3>
+						<p>Découvrir →</p>
+					</div>
+				</div>
+				<div class="category-card">
+					<img src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Accessories" class="category-image">
+					<div class="category-overlay">
+						<h3 class="category-name">Accessories</h3>
+						<p>Découvrir →</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Newsletter Section -->
+		<section class="newsletter-section">
+			<div class="newsletter-content">
+				<h2>Rejoins le mouvement</h2>
+				<p>-15% sur ta première commande + accès aux ventes privées</p>
+				<form class="newsletter-form">
+					<input type="email" placeholder="Ton email" class="newsletter-input">
+					<button class="cta-button">S'inscrire</button>
+				</form>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer>
+			<div class="footer-content">
+				<div class="footer-section">
+					<h4>HYPE STORE</h4>
+					<p>Ta destination mode préférée pour le streetwear et les sneakers.</p>
+					<div class="social-links">
+						<a href="#"><i class="fab fa-instagram"></i></a>
+						<a href="#"><i class="fab fa-tiktok"></i></a>
+						<a href="#"><i class="fab fa-snapchat"></i></a>
+					</div>
+				</div>
+				<div class="footer-section">
+					<h4>Shop</h4>
+					<ul>
+						<li>Nouveautés</li>
+						<li>Bestsellers</li>
+						<li>Promos</li>
+						<li>Collection</li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h4>Aide</h4>
+					<ul>
+						<li>FAQ</li>
+						<li>Livraison</li>
+						<li>Retours</li>
+						<li>Contact</li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+
+		<script>
+			// Animation des produits au scroll
+			const products = document.querySelectorAll('.product-card');
+			const observer = new IntersectionObserver(
+				entries => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.style.opacity = 1;
+							entry.target.style.transform = 'translateY(0)';
+						}
+					});
+				},
+				{ threshold: 0.1 }
+			);
+
+			products.forEach(product => {
+				product.style.opacity = 0;
+				product.style.transform = 'translateY(20px)';
+				product.style.transition = 'all 0.6s ease';
+				observer.observe(product);
+			});
+
+			// Effet parallaxe sur le hero
+			window.addEventListener('scroll', () => {
+				const hero = document.querySelector('.hero');
+				const scrolled = window.pageYOffset;
+				hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+			});
+
+			// Animation du panier
+			document.querySelector('a[href="#panier"]').addEventListener('mouseenter', (e) => {
+				e.target.style.transform = 'scale(1.2)';
+				setTimeout(() => {
+					e.target.style.transform = 'scale(1)';
+				}, 200);
+			});
+
+			// Smooth scroll
+			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+				anchor.addEventListener('click', function (e) {
+					e.preventDefault();
+					document.querySelector(this.getAttribute('href')).scrollIntoView({
+						behavior: 'smooth'
+					});
+				});
+			});
+		</script>
+	</body>
+	</html>
