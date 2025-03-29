@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levi's Move x Beyoncé</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #FF0000;
+            --secondary-color: #000000;
+            --accent-color: #FFD700;
+            --dark: #111111;
+            --light: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f8f8f8;
+            padding-top: 80px;
+        }
+
+        nav {
+            background-color: var(--dark);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                        url('https://images.pexels.com/photos/1689731/pexels-photo-1689731.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--light);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--light);
+            transform: scale(1.05);
+        }
+
+        .collection-intro {
+            padding: 4rem 2rem;
+            text-align: center;
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .collection-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .collection-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .collection-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 2rem;
+            color: var(--light);
+        }
+
+        .features-section {
+            padding: 4rem 2rem;
+            background-color: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        #cartModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+            z-index: 1001;
+            padding: 20px;
+        }
+
+        #modalOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .products-section {
+            padding: 4rem 2rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--accent-color);
+            color: var(--dark);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary-color);
+            color: var(--light);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+			<div class="nav-content">
+        <a href="levis.html">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Levi%27s_logo.svg/2560px-Levi%27s_logo.svg.png" alt="Levi's Logo" style="height: 50px; width: auto; display: block;"></a>
+				<div class="nav-links">
+					<a href="move.html">Levi's Move</a>
+					<a href="hommelevis.html">Hommes</a>
+					<a href="femmelevis.html">Femmes</a>
+					<a href="enfantslevis.html">Enfants</a>
+					<a href="engagements">nos engagements</a>
+					<a href="#" id="cartIcon" style="position: relative;">
+					<i class="fas fa-shopping-cart"></i>
+			<span class="cart-count" style="position: absolute; top: -10px; right: -10px; background-color: var(--primary-color); color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;">0</span>
+</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Levi's Move x Beyoncé</h1>
+            <p>Une collection exclusive de sportwear alliant style iconique et performance</p>
+            <a href="#collection" class="cta-button">Découvrir la Collection</a>
+        </div>
+    </section>
+
+    <!-- Collection Intro -->
+    <section class="collection-intro">
+        <h2>LA RÉVOLUTION DU SPORTWEAR</h2>
+        <p>Une collaboration exclusive entre Levi's et Beyoncé pour redéfinir le sportswear moderne</p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-tshirt feature-icon"></i>
+                <h3>Technologie Avancée</h3>
+                <p>Tissus respirants et évacuation de l'humidité</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-running feature-icon"></i>
+                <h3>Performance Optimale</h3>
+                <p>Liberté de mouvement maximale</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-star feature-icon"></i>
+                <h3>Style Unique</h3>
+                <p>Design exclusif signé Beyoncé</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="collection">
+        <div class="products-grid">
+            <!-- Femmes -->
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/7319324/pexels-photo-7319324.jpeg" alt="Legging Performance" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Legging Performance</h3>
+                    <p class="product-price">89.99 €</p>
+                    <button class="add-to-cart" onclick="addToCart(this.parentElement)">Ajouter au panier</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/6311651/pexels-photo-6311651.jpeg" alt="Brassière Sport" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Brassière Sport Premium</h3>
+                    <p class="product-price">49.99 €</p>
+                    <button class="add-to-cart" onclick="addToCart(this.parentElement)">Ajouter au panier</button>
+                </div>
+            </div>
+
+            <!-- Hommes -->
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/6550851/pexels-photo-6550851.jpeg" alt="Short Performance" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Short Performance</h3>
+                    <p class="product-price">59.99 €</p>
+                    <button class="add-to-cart" onclick="addToCart(this.parentElement)">Ajouter au panier</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/6740756/pexels-photo-6740756.jpeg" alt="T-shirt Compression" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">T-shirt Compression</h3>
+                    <p class="product-price">45.99 €</p>
+                    <button class="add-to-cart" onclick="addToCart(this.parentElement)">Ajouter au panier</button>
+                </div>
+            </div>
+
+            <!-- Accessoires -->
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/6740779/pexels-photo-6740779.jpeg" alt="Sac de Sport" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Sac de Sport Premium</h3>
+                    <p class="product-price">79.99 €</p>
+                    <button class="add-to-cart" onclick="addToCart(this.parentElement)">Ajouter au panier</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/6740835/pexels-photo-6740835.jpeg" alt="Casquette Performance" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Casquette Performance</h3>
+                    <p class="product-price">29.99 €</p>
+                    <button class="add-to-cart" onclick="addToCart(this.parentElement)">Ajouter au panier</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cartModal">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2>Panier</h2>
+            <span id="closeCart" style="cursor: pointer; font-size: 24px;">&times;</span>
+        </div>
+        <div id="cartItems"></div>
+        <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;">
+            <div style="font-size: 18px; font-weight: bold;">Total: <span id="cartTotal">0.00</span> €</div>
+            <button onclick="checkout()" style="width: 100%; padding: 10px; background: var(--accent-color); color: var(--dark); border: none; border-radius: 5px; margin-top: 10px; cursor: pointer;">Commander</button>
+        </div>
+    </div>
+    <div id="modalOverlay"></div>
+
+    <script>
+        // Gestion du panier
+        let cart = [];
+
+        // Gestion du modal panier
+        const cartModal = document.getElementById('cartModal');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const cartIcon = document.getElementById('cartIcon');
+        const closeCart = document.getElementById('closeCart');
+        const cartItemsContainer = document.getElementById('cartItems');
+        const cartCount = document.querySelector('.cart-count');
+
+        // Ouvrir/Fermer le panier
+        cartIcon.addEventListener('click', (e) => {
+            e.preventDefault();
+            cartModal.style.display = 'block';
+            modalOverlay.style.display = 'block';
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+            modalOverlay.style.display = 'none';
+        });
+
+        modalOverlay.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+            modalOverlay.style.display = 'none';
+        });
+
+        // Ajouter au panier
+        function addToCart(productInfo) {
+            const name = productInfo.querySelector('.product-name').textContent;
+            const price = parseFloat(productInfo.querySelector('.product-price').textContent);
+            const image = productInfo.parentElement.querySelector('.product-image').src;
+            
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            alert(`${name} a été ajouté au panier !`);
+        }
+
+        // Mettre à jour l'affichage du panier
+        function updateCart() {
+            cartItemsContainer.innerHTML = cart.map(item => `
+                <div style="display: flex; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+                    <img src="${item.image}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
+                    <div style="flex-grow: 1;">
+                        <div>${item.name}</div>
+                        <div>${item.price.toFixed(2)} € x ${item.quantity}</div>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <button onclick="updateQuantity('${item.name}', -1)" style="padding: 2px 6px; background: #eee; border: none; cursor: pointer;">-</button>
+                        <span style="margin: 0 8px;">${item.quantity}</span>
+                        <button onclick="updateQuantity('${item.name}', 1)" style="padding: 2px 6px; background: #eee; border: none; cursor: pointer;">+</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('cartTotal').textContent = total.toFixed(2);
+            
+            cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+
+        // Mettre à jour la quantité
+        function updateQuantity(productName, change) {
+            const item = cart.find(item => item.name === productName);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(i => i.name !== productName);
+                }
+                updateCart();
+            }
+        }
+
+        // Passer la commande
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Votre panier est vide');
+                return;
+            }
+            alert('Merci pour votre commande !');
+            cart = [];
+            updateCart();
+            cartModal.style.display = 'none';
+            modalOverlay.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
